@@ -52,5 +52,4 @@ while attempts > 0:                                                   # we are u
 
 if attempts == 0:
     print(f"Sorry, your attempts are full. The word is '{computer_guessed}'")
-
-
+    

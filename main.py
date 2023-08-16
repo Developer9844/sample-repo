@@ -35,7 +35,7 @@ import random
 
 def guess_the_number():
     print("Welcome to the Guess the Number game!")
-    print("I'm thinking of a number between 1 and 100. Can you guess it?")
+    print("I'm thinking of a number between 1 and 3. Can you guess it?")
 
     computer_number =  random.randint(1, 3)
     
@@ -97,3 +97,64 @@ while True:     # we use the while true loop for infinite iterables and give the
     
 print(my_list)
 
+# ----------------------------------------------------
+
+from collections import Counter
+import re
+
+def count_word_frequency(text):
+    # Remove special characters and convert to lowercase
+    cleaned_text = re.sub(r'[^\w\s]', '', text.lower())
+    
+    # Split text into words
+    words = cleaned_text.split()
+    
+    # Count the frequency of words
+    word_count = Counter(words)
+    
+    return word_count
+
+filename = 'sample-repo\index.txt'  # Replace with your file name
+
+# Read the text from a file
+with open(filename, 'r') as file:
+    text = file.read()
+
+# Get the word frequency
+word_frequency = count_word_frequency(text)
+
+
+# Display the word frequency
+for word, count in word_frequency.items():
+    print(f'{word}: {count}')
+
+#-----------------------------------------------------------------------------
+
+import os
+import re
+
+def rename_files(directory_path, search_pattern, replace_pattern):
+
+    for filename in os.listdir(directory_path):
+
+        old_filepath = os.path.join(directory_path, filename)
+
+        if os.path.isfile(old_filepath):
+            
+            new_filename = re.sub(search_pattern, replace_pattern, filename)
+            
+            new_filepath = os.path.join(directory_path, new_filename)
+            
+            os.rename(old_filepath, new_filepath)
+            
+            print(f"Renamed: {filename} to {new_filename}")
+
+if __name__ == "__main__":
+
+    directory_path = "/path/to/your/directory"       # Update this with your directory path
+
+    search_pattern = r"old_pattern"                  # Update this with the pattern you want to search for
+
+    replace_pattern = r"new_pattern"                 # Update this with the pattern you want to replace with
+
+    rename_files(directory_path, search_pattern, replace_pattern)
