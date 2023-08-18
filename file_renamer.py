@@ -3,6 +3,7 @@ import re
 
 def rename_files(directory_path, search_pattern, replace_pattern):
 
+
     for filename in os.listdir(directory_path):
 
         old_filepath = os.path.join(directory_path, filename)
@@ -17,15 +18,15 @@ def rename_files(directory_path, search_pattern, replace_pattern):
             
             print(f"Renamed: {filename} to {new_filename}")
 
-if __name__ == "__main__":
+if __name__ == "__main__":       # you can also remove the main execution
 
     # Update this with your directory path
     dp = "sample-repo"       
 
     # Update this with the pattern you want to search for
-    sp = r"exercise.txt"                         
+    sp = r"exercise.txt"                
 
     # Update this with the pattern you want to replace with
-    rp = r"Exercise.txt"                        
+    rp = r"Exercise.txt"               
 
     rename_files(dp, sp, rp)

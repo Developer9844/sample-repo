@@ -158,3 +158,39 @@ if __name__ == "__main__":
     replace_pattern = r"new_pattern"                 # Update this with the pattern you want to replace with
 
     rename_files(directory_path, search_pattern, replace_pattern)
+
+# for multiple files
+import os
+import re
+
+def rename_files(directory_path, renaming_rules):
+
+    # e.g you put sample-repo as dir path and index.txt is your file which you want to rename
+    # filename = index.txt, it will search in the dir_path = sample-repo
+    for filename in os.listdir(directory_path):              
+        
+                       # old_filepath = dir_path\index.txt, after that it will join the dir path and filename
+        old_filepath = os.path.join(directory_path, filename)
+        
+        # it checks, in the dir_path, is index.txt is available
+        if os.path.isfile(old_filepath):
+        
+            if filename in renaming_rules:
+        
+                new_filename = re.sub(renaming_rules[filename][0], renaming_rules[filename][1], filename)
+        
+                new_filepath = os.path.join(directory_path, new_filename)
+        
+                os.rename(old_filepath, new_filepath)
+        
+                print(f"Renamed: {filename} to {new_filename}")
+
+# Provide your renaming rules here
+directory_path = "sample-repo"  # Update with your directory path
+
+renaming_rules = {
+    "file_old1.txt": (r"_old", "_new1"),
+    "file_old2.txt": (r"_old", "_new2")
+}
+
+rename_files(directory_path, renaming_rules)
