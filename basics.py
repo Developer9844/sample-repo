@@ -79,3 +79,31 @@ t = re.sub("a", "-", c)
 
 print(t)
 # output = Hello, my n-me, is T-co, I -m, progr-mmer
+# -----------------------------------------------------------------------------------------
+import requests
+
+def get_exchange_rates(api_key):
+    url = f"https://api.freecurrencyapi.com/v1/latest?apikey={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    return data
+
+api_key = "fca_live_dx1pzRRe7M4n89i0Y4yDP6r2WZ2K6Zkiw09b8D1J"
+
+exchange_rates = get_exchange_rates(api_key)
+
+print(exchange_rates.values())
+
+
+
+print("Available currencies:", ", ".join(exchange_rates.keys()))
+
+enter_amount = int(input("Enter amount: "))
+
+enter_from_currency = input("Enter currency: ").upper()
+enter_to_currency = input("Enter conv currency: ").upper()
+
+
+converted_amount = enter_amount * exchange_rates[enter_to_currency] / exchange_rates[enter_from_currency]
+
+print(converted_amount)
