@@ -114,7 +114,7 @@ def count_word_frequency(text):
     
     return word_count
 
-filename = 'sample-repo\index.txt'  # Replace with your file name
+filename = 'Index.txt'  # Replace with your file name
 
 # Read the text from a file
 with open(filename, 'r') as file:
@@ -194,3 +194,42 @@ renaming_rules = {
 }
 
 rename_files(directory_path, renaming_rules)
+
+#----------------------------------------------------------------------------------------------------------------------
+
+def get_exchange_rates():
+    exchange_rates = {
+        "USD": 1.0,
+        "EUR": 0.85,
+        "GBP": 0.72,
+        "JPY": 110.48,
+        "AUD": 1.37,
+        # Add more exchange rates here
+    }
+    return exchange_rates
+
+def convert_currency(amount, from_currency, to_currency, exchange_rates):
+    if from_currency not in exchange_rates or to_currency not in exchange_rates:
+        return None
+
+    converted_amount = amount * exchange_rates[to_currency] / exchange_rates[from_currency]
+    return converted_amount
+
+def main():
+    exchange_rates = get_exchange_rates()
+
+    print("Available currencies:", ", ".join(exchange_rates.keys()))
+
+    amount = float(input("Enter amount: "))
+    from_currency = input("Enter the source currency: ").upper()
+    to_currency = input("Enter the target currency: ").upper()
+
+    converted_amount = convert_currency(amount, from_currency, to_currency, exchange_rates)
+
+    if converted_amount is not None:
+        print(f"{amount:.2f} {from_currency} is equivalent to {converted_amount:.2f} {to_currency}")
+    else:
+        print("Invalid currencies")
+
+if __name__ == "__main__":
+    main()

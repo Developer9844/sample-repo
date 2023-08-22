@@ -41,7 +41,7 @@ while True:
 
     if choice == "1":
         name = input("Enter name: ")
-        phone_number = input("Enter phone number: ")
+        phone_number = int(input("Enter phone number: "))
         add_contact(name, phone_number)
     elif choice == "2":
         name = input("Enter name to lookup: ")
@@ -49,3 +49,4 @@ while True:
     elif choice == "3":
         break
 
+print(phonebook)

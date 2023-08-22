@@ -45,7 +45,7 @@ def csv_to_dict(csv_file):
 
         for row in r:
             key = row[0]
-            value = row[1]
+            value = float(row[1])
 
             result_dict[key] = value
 
@@ -53,31 +53,41 @@ def csv_to_dict(csv_file):
 
 csv_file = "Index.csv"
 
-p = csv_to_dict(csv_file)
+exchange_rate = csv_to_dict(csv_file)
 
-print(p)
+print(type(p))
 
 def get_exchange_rates():
+    return exchange_rate
 
-    return p
+# def get_exchange_rates():
+#     exchange_rates = {
+#         "USD": 1.0,
+#         "EUR": 0.85,
+#         "GBP": 0.72,
+#         "JPY": 110.48,
+#         "AUD": 1.37,
+#         # Add more exchange rates here
+#     }
+#     return exchange_rates
 
 def convert_currency(amount, from_currency, to_currency, p):
-    if from_currency not in p or to_currency not in p:
+    if from_currency not in exchange_rate or to_currency not in exchange_rate:
         return None
 
-    converted_amount = amount * p[to_currency] / p[from_currency]   # 100 INR * 1 USD/
+    converted_amount = amount * exchange_rate[to_currency] / exchange_rate[from_currency]   # 100 INR * 1 USD/
     return converted_amount
 
 def main():
-    p = get_exchange_rates()
+    exchange_rate = get_exchange_rates()
 
-    print("Available currencies:", ", ".join(p.keys()))
+    print("Available currencies:", ", ".join(exchange_rate.keys()))
 
     amount = float(input("Enter amount: "))
-    from_currency = input("Enter the source currency: ").upper()
-    to_currency = input("Enter the target currency: ").upper()
+    from_currency = input("Enter the source currency: ")
+    to_currency = input("Enter the target currency: ")
 
-    converted_amount = convert_currency(amount, from_currency, to_currency, p)
+    converted_amount = convert_currency(amount, from_currency, to_currency, exchange_rate)
 
     if converted_amount is not None:
         print(f"{amount:.2f} {from_currency} is equivalent to {converted_amount:.2f} {to_currency}")
